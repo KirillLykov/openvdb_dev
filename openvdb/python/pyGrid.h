@@ -37,7 +37,7 @@
 
 #include <boost/python.hpp>
 #include <boost/type_traits/remove_const.hpp>
-#ifdef PY_OPENVDB_USE_NUMPY
+#ifdef PY_OPENVDB_USE_NUMPY 
 #include <arrayobject.h> // for PyArray_DATA()
 #endif
 #include "openvdb/openvdb.h"

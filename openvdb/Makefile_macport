@@ -79,81 +79,82 @@
 #
 
 # The directory into which to install libraries, executables and header files
-INSTALL_DIR := /tmp/OpenVDB
+INSTALL_DIR := /Users/kirill/bin/openvdb
 
 # The parent directory of the boost/ header directory
-BOOST_INCL_DIR := $(HT)/include
+BOOST_INCL_DIR := /opt/local/include/boost
 
 # The parent directory of the OpenEXR/ header directory
-EXR_INCL_DIR := $(HT)/include
+EXR_INCL_DIR := /opt/local/include
 # The directory containing libIlmImf, libIlmThread, etc.
-EXR_LIB_DIR := $(HDSO)
+EXR_LIB_DIR := /opt/local/lib
 EXR_LIB := -lIlmImf -lIlmThread -lIex -lImath
 
 # The parent directory of the OpenEXR/ header directory (which contains half.h)
-HALF_INCL_DIR := $(EXR_INCL_DIR)
+HALF_INCL_DIR := /opt/local/include/OpenEXR
 # The directory containing libHalf
-HALF_LIB_DIR := $(EXR_LIB_DIR)
+HALF_LIB_DIR := /opt/local/lib
 HALF_LIB := -lHalf
 
 # The parent directory of the tbb/ header directory
-TBB_INCL_DIR := $(HT)/include
+TBB_INCL_DIR := /opt/local/include/tbb
 # The directory containing libtbb
-TBB_LIB_DIR := $(HDSO)
+TBB_LIB_DIR := /opt/local/lib
 TBB_LIB := -ltbb
 
 # A scalable, concurrent malloc replacement library
 # such as jemalloc (included in the Houdini HDK) or TBB malloc
 # (leave blank if unavailable)
-CONCURRENT_MALLOC_LIB := -ljemalloc
-#CONCURRENT_MALLOC_LIB := -ltbbmalloc_proxy -ltbbmalloc
+#CONCURRENT_MALLOC_LIB := -ljemalloc
+CONCURRENT_MALLOC_LIB := -ltbbmalloc
+#There is no  -ltbbmalloc_proxy for macport 
 # The directory containing the malloc replacement library
 CONCURRENT_MALLOC_LIB_DIR := $(HDSO)
 
 # The parent directory of the cppunit/ header directory
 # (leave blank if CppUnit is unavailable)
-CPPUNIT_INCL_DIR := /rel/map/generic-2013.22/sys_include
+CPPUNIT_INCL_DIR := /opt/local/include/cppunit
 # The directory containing libcppunit
-CPPUNIT_LIB_DIR := /rel/depot/third_party_build/cppunit/1.10.2-7/opt-ws5-x86_64-gccWS5_64/lib
+CPPUNIT_LIB_DIR := /opt/local/lib
 CPPUNIT_LIB := -lcppunit
 
 # The directory containing glfw.h
 # (leave blank if GLFW is unavailable)
-GLFW_INCL_DIR := /rel/third_party/glfw/current/include
+GLFW_INCL_DIR := /Users/kirill/bin/glfw/include
 # The directory containing libglfw
-GLFW_LIB_DIR := /rel/third_party/glfw/current/lib
+GLFW_LIB_DIR := /Users/kirill/bin/glfw/lib
 GLFW_LIB := -lglfw
 
 # The version of Python for which to build the OpenVDB module
 # (leave blank if Python is unavailable)
-PYTHON_VERSION := 2.6
+PYTHON_VERSION := 2.7
 # The directory containing Python.h
-PYTHON_INCL_DIR := $(HFS)/python/include/python$(PYTHON_VERSION)
+PYTHON_INCL_DIR := /opt/local/Library/Frameworks/Python.framework/Versions/$(PYTHON_VERSION)/include/python$(PYTHON_VERSION)
 # The directory containing pyconfig.h
-PYCONFIG_INCL_DIR := $(PYTHON_INCL_DIR)
+PYCONFIG_INCL_DIR := /opt/local/Library/Frameworks/Python.framework/Versions/$(PYTHON_VERSION)/include/python$(PYTHON_VERSION)
 # The directory containing libpython
-PYTHON_LIB_DIR := $(HFS)/python/lib
+PYTHON_LIB_DIR := /opt/local/Library/Frameworks/Python.framework/Versions/$(PYTHON_VERSION)/lib
 PYTHON_LIB := -lpython$(PYTHON_VERSION)
 # The directory containing libboost_python
-BOOST_PYTHON_LIB_DIR := /rel/depot/third_party_build/boost/rhel6-1.46.1-0/lib
-BOOST_PYTHON_LIB := -lboost_python-gcc41-mt-python26-1_46_1
+BOOST_PYTHON_LIB_DIR := /opt/local/lib
+BOOST_PYTHON_LIB := -lboost_python-mt
 # The directory containing arrayobject.h
 # (leave blank if NumPy is unavailable)
-NUMPY_INCL_DIR := /rel/map/generic-2013.22/include
+NUMPY_INCL_DIR := #DOES NOT work(?) /opt/local/Library/Frameworks/Python.framework/Versions/2.7/include/python2.7/Numeric/
 # The Epydoc executable
 # (leave blank if Epydoc is unavailable)
-EPYDOC := epydoc
+EPYDOC := #epydoc
 # Set PYTHON_WRAP_ALL_GRID_TYPES to "yes" to specify that the Python module
 # should expose (almost) all of the grid types defined in openvdb.h
 # Otherwise, only FloatGrid, BoolGrid and Vec3SGrid will be exposed
 # (see, e.g., exportIntGrid() in python/pyIntGrid.cc).
 # Compiling the Python module with PYTHON_WRAP_ALL_GRID_TYPES set to "yes"
 # can be very memory-intensive.
-PYTHON_WRAP_ALL_GRID_TYPES := no
+PYTHON_WRAP_ALL_GRID_TYPES := #no
 
 # The Doxygen executable
 # (leave blank if Doxygen is unavailable)
-DOXYGEN := doxygen
+DOXYGEN := 
 
 
 #
@@ -182,7 +183,7 @@ endif
 ifeq (yes,$(strip $(debug)))
     OPTIMIZE := -g
 else
-    OPTIMIZE := -O3 -DNDEBUG
+    OPTIMIZE := -O2 -DNDEBUG
 endif
 
 ifeq (yes,$(strip $(verbose)))
